@@ -185,51 +185,17 @@
 					</div>
 					<div class="clearfix choose">
 						<div id="specification" class="summary-wrap clearfix">
-							<dl>
+							<dl v-for="(val, key, index) in specialSpec">
 								<dt>
 									<div class="fl title">
-									<i>选择颜色</i>
-								</div>
+										<i>{{paramMap[key]}}</i>
+									</div>
 								</dt>
-								<dd>
-									<a href="javascript:;" class="selected">
-										金色<span title="点击取消选择">&nbsp;</span>
+								<dd v-for="(v,index) in val" @click="indexes[key] = index">
+									<a href="javascript:;" :class="{selected: index == indexes[key]}">
+										{{v}}<span title="点击取消选择">&nbsp;</span>
 									</a>
 								</dd>
-								<dd><a href="javascript:;">银色</a></dd>
-								<dd><a href="javascript:;">黑色</a></dd>
-							</dl>
-							<dl>
-								<dt>
-									<div class="fl title">
-									<i>内存容量</i>
-								</div>
-								</dt>
-								<dd><a href="javascript:;" class="selected">16G<span title="点击取消选择">&nbsp;</span>
-</a></dd>
-								<dd><a href="javascript:;">64G</a></dd>
-								<dd><a href="javascript:;" class="locked">128G</a></dd>
-							</dl>
-							<dl>
-								<dt>
-									<div class="fl title">
-									<i>选择版本</i>
-								</div>
-								</dt>
-								<dd><a href="javascript:;" class="selected">公开版<span title="点击取消选择">&nbsp;</span>
-</a></dd>
-								<dd><a href="javascript:;">移动版</a></dd>							
-							</dl>
-							<dl>
-								<dt>
-									<div class="fl title">
-									<i>购买方式</i>
-								</div>
-								</dt>
-								<dd><a href="javascript:;" class="selected">官方标配<span title="点击取消选择">&nbsp;</span>
-</a></dd>
-								<dd><a href="javascript:;">移动优惠版</a></dd>	
-								<dd><a href="javascript:;"  class="locked">电信优惠版</a></dd>
 							</dl>
 						</div>
 
@@ -668,14 +634,19 @@
 	// sku集合
 	const skus = /*[[${skus}]]*/ [];
 	// 规格参数id与name对
-	const paramMap = /*[[${params}]]*/ {};
+	const paramMap = /*[[${paramMap}]]*/ {};
 	// 特有规格参数集合
 	const specialSpec = JSON.parse(/*[[${spuDetail.specialSpec}]]*/ "");
+
+	const indexes ={};
+	Object.keys(specialSpec).forEach(key=>{
+		indexes[key] = 0;
+	})
 </script>
 
 <script th:inline="javascript">
 	const a = /*[[${groups}]]*/ [];
-	const b = /*[[${params}]]*/ [];
+	const b = /*[[${paramMap}]]*/ [];
 	const c = /*[[${categories}]]*/ [];
 	const d = /*[[${spu}]]*/ {};
 	const e = /*[[${spuDetail}]]*/ {};
@@ -689,7 +660,8 @@
         	ly,
 			skus,
 			paramMap,
-			specialSpec
+			specialSpec,
+			indexes,
         },
         components:{
             lyTop: () => import('/js/pages/top.js')
