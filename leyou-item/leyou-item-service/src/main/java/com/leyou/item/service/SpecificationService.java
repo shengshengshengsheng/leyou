@@ -25,7 +25,9 @@ public class SpecificationService {
     public List<SpecGroup> queryGroupsByCid(Long cid) {
         SpecGroup specGroup = new SpecGroup();
         specGroup.setCid(cid);
-        return this.groupMapper.select(specGroup);
+        List<SpecGroup> specGroups = groupMapper.select(specGroup);
+        specGroups.forEach(group -> group.setParams(this.queryParams(group.getId(),cid,null,null)));
+        return specGroups;
     }
 
     /**

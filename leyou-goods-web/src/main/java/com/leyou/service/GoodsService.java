@@ -78,6 +78,7 @@ public class GoodsService {
         map.put("groups", groups);
         // 查询特殊规格参数
         map.put("paramMap", paramMap);
+        System.out.println(JSON.toJSONString(map));
         return map;
     }
 }
