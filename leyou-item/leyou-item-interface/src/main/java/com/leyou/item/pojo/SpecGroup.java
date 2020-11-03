@@ -17,6 +17,9 @@ public class SpecGroup {
 
     private String name;
 
+    /**
+     * 该组下所有的参数
+     */
     @Transient
     private List<SpecParam> params;
 
