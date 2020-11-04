@@ -62,11 +62,24 @@ public class GoodsHtmlService {
      */
     public void asyncExcute(Long spuId) {
         ThreadUtils.execute(()->createHtml(spuId));
+        ///等价写法
         /*ThreadUtils.execute(new Runnable() {
             @Override
             public void run() {
                 createHtml(spuId);
             }
         });*/
+    }
+
+    /**
+     * 删除本地html
+     * @author XuQiangsheng
+     * @date 2020/11/4 8:47
+     * @param id
+     * @return void
+    */
+    public void deleteHtml(Long id) {
+        File file = new File("D:\\nginx-1.14.0\\html\\item\\" + id + ".html");
+        file.deleteOnExit();
     }
 }

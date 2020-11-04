@@ -325,4 +325,18 @@ public class SearchService {
         }
         return categories;
     }
+
+    public void createIndex(Long id) throws IOException {
+
+        Spu spu = this.goodsClient.querySpuById(id);
+        // 构建商品
+        Goods goods = this.buildGoods(spu);
+
+        // 保存数据到索引库
+        this.goodsReponsitory.save(goods);
+    }
+
+    public void deleteIndex(Long id) {
+        this.goodsReponsitory.deleteById(id);
+    }
 }
