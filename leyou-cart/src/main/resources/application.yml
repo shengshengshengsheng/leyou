@@ -1,5 +1,5 @@
 server:
-  port: 8088
+  port: 8090
 spring:
   application:
     name: cart-service
@@ -13,3 +13,7 @@ eureka:
   instance:
     lease-renewal-interval-in-seconds: 5
     lease-expiration-duration-in-seconds: 15
+leyou:
+  jwt:
+    pubKeyPath: E:\learning\leyou\leyou\rsa\rsa.pub # 公钥地址
+    cookieName: LY_TOKEN # cookie的名称
